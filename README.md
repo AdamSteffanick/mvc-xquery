@@ -1,2 +1,21 @@
-# mvc-xquery
-Model-View-Controller (MVC) framework in XQuery
+# MVC-XQuery
+
+[![version][version-badge]][CHANGELOG] [![license][license-badge]][LICENSE]
+
+MVC-XQuery | A Model-View-Controller (MVC) framework in XQuery
+Copyright (C) 2018 [Adam Steffanick](https://www.steffanick.com/adam/)
+
+## Download
+* [**Latest release**](https://github.com/AdamSteffanick/mvc-xquery/releases/latest)
+
+## License
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+[CHANGELOG]: ./CHANGELOG.md
+[version-badge]: https://img.shields.io/badge/mvc--xquery-v0.0.1-0038e2.svg?style=flat-square
+[LICENSE]: ./LICENSE
+[license-badge]: https://img.shields.io/badge/license-GPL-0038e2.svg?style=flat-square
