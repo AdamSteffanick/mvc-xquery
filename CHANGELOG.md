@@ -4,12 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Added
+* [model.xquery]
+* [view.xquery]
+* [controller.xquery]
 
 ## [0.0.1] - 2018-04-02
 ### Added
 * [CHANGELOG.md]
-* [shields.io] version info ([README.md])
 * [shields.io] lisence info ([README.md])
+* [shields.io] version info ([README.md])
 
 ## [Initial commit]
 ### Added
@@ -22,5 +26,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 [CHANGELOG.md]: ./CHANGELOG.md
 [LISENCE]: https://github.com/AdamSteffanick/mvc-xquery/blob/master/LICENSE
 [README.md]: ./README.md
+[model.xquery]: ./model.xquery
+[view.xquery]: ./view.xquery
+[controller.xquery]: ./controller.xquery
 
 [shields.io]: http://shields.io/
