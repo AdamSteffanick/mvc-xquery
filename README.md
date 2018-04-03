@@ -25,9 +25,9 @@ mvc-xquery
 ├── LICENSE
 ├── README.md
 └── webapp
-    ├── [controller.xquery]
-    ├── [model.xquery]
-    └── [view.xquery]
+    ├── controller.xquery
+    ├── model.xquery
+    └── view.xquery
 
 1 directory, 6 files
 ```
