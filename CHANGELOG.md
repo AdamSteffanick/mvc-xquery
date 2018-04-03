@@ -4,7 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+
+## [0.0.2] - 2018-04-03
 ### Added
+* [/webapp/]
 * [model.xquery]
 * [view.xquery]
 * [controller.xquery]
@@ -20,14 +23,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 * [LISENCE]
 * [README.md]
 
-[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.0.1...HEAD
+[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.0.2...HEAD
+[0.0.2]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/AdamSteffanick/mvc-xquery/compare/1967830...v0.0.1
 [Initial commit]: https://github.com/AdamSteffanick/mvc-xquery/commit/19678309320771cd968dbfea2f8f8582d5dc0de6
+
 [CHANGELOG.md]: ./CHANGELOG.md
 [LISENCE]: https://github.com/AdamSteffanick/mvc-xquery/blob/master/LICENSE
 [README.md]: ./README.md
-[model.xquery]: ./model.xquery
-[view.xquery]: ./view.xquery
-[controller.xquery]: ./controller.xquery
+
+[/webapp/]: ./webapp/
+[model.xquery]: ./webapp/model.xquery
+[view.xquery]: ./webapp/view.xquery
+[controller.xquery]: ./webapp/controller.xquery
 
 [shields.io]: http://shields.io/

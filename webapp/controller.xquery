@@ -2,20 +2,17 @@ xquery version "3.1" encoding "UTF-8";
 
 module namespace c = "controller";
 
-import module namespace m = "model" at "model.xquery";
-import module namespace v = "view" at "view.xquery";
-
 (:~
- : The controller function library module for MVC-XQuery.
+ : The MVC-XQuery controller function library module.
  :
- : MVC-XQuery | A Model-View-Controller (MVC) framework in XQuery
+ : MVC-XQuery | A Model-View-Controller framework for BaseX
  : Copyright (C) 2018 Adam Steffanick
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
  : @version v0.0.2
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : April 2, 2018
+ : April 3, 2018
  :
  : This program is free software: you can redistribute it and/or modify
  : it under the terms of the GNU General Public License as published by
@@ -34,3 +31,6 @@ import module namespace v = "view" at "view.xquery";
  : @see: https://github.com/AdamSteffanick/mvc-xquery/blob/master/LICENSE
  :
  :)
+
+import module namespace m = "model" at "model.xquery";
+import module namespace v = "view" at "view.xquery";

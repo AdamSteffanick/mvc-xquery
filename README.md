@@ -2,7 +2,7 @@
 
 [![version][version-badge]][CHANGELOG] [![license][license-badge]][LICENSE]
 
-MVC-XQuery | A Model-View-Controller (MVC) framework in XQuery
+MVC-XQuery | A Model-View-Controller framework for BaseX 
 
 Copyright (C) 2018 [Adam Steffanick](https://www.steffanick.com/adam/)
 
@@ -10,11 +10,26 @@ Copyright (C) 2018 [Adam Steffanick](https://www.steffanick.com/adam/)
 * [**Latest release**](https://github.com/AdamSteffanick/mvc-xquery/releases/latest)
 
 ## Documentation
-For BaseX 9.0:
+BaseX 9.0:
 
-* Download this repository and place all files within the `webapp` directory, which should be a subdirectory of `basex`
+* Download this repository and place all files within the appropriate subdirectories of `basex`
 * Modify [model.xquery], [view.xquery], and [controller.xquery] as needed
 * Run the [BaseX HTTP Server](http://docs.basex.org/wiki/Startup#HTTP_Server)
+
+## Manifest tree
+MVC-XQuery should contain:
+
+```mvc-xquery
+├── CHANGELOG.md
+├── LICENSE
+├── README.md
+└── webapp
+    ├── controller.xquery
+    ├── model.xquery
+    └── view.xquery
+
+1 directory, 6 files
+```
 
 ## License
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
