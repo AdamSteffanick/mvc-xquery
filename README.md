@@ -25,9 +25,9 @@ mvc-xquery
 ├── LICENSE
 ├── README.md
 └── webapp
-    ├── controller.xquery
-    ├── model.xquery
-    └── view.xquery
+    ├── [controller.xquery]
+    ├── [model.xquery]
+    └── [view.xquery]
 
 1 directory, 6 files
 ```
@@ -43,6 +43,7 @@ You should have received a copy of the GNU General Public License along with thi
 [version-badge]: https://img.shields.io/badge/mvc--xquery-v0.0.2-0038e2.svg?style=flat-square
 [LICENSE]: ./LICENSE
 [license-badge]: https://img.shields.io/badge/license-GPL-0038e2.svg?style=flat-square
-[model.xquery]: ./model.xquery
-[view.xquery]: ./view.xquery
-[controller.xquery]: ./controller.xquery
+
+[model.xquery]: ./webapp/model.xquery
+[view.xquery]: ./webapp/view.xquery
+[controller.xquery]: ./webapp/controller.xquery
