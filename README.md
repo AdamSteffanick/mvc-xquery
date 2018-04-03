@@ -19,7 +19,7 @@ BaseX 9.0:
 ## Manifest tree
 MVC-XQuery should contain:
 
-```mvc-xquery
+``` mvc-xquery
 ├── CHANGELOG.md
 ├── LICENSE
 ├── README.md
