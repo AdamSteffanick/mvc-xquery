@@ -17,10 +17,9 @@ BaseX 9.0:
 * Run the [BaseX HTTP Server](http://docs.basex.org/wiki/Startup#HTTP_Server)
 
 ## Manifest tree
-MVC-XQuery should contain:
+The `mvc-xquery` directory should contain:
 
 ```
-mvc-xquery
 ├── CHANGELOG.md
 ├── LICENSE
 ├── README.md
