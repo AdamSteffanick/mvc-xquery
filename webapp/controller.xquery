@@ -1,7 +1,5 @@
 xquery version "3.1" encoding "UTF-8";
 
-module namespace c = "controller";
-
 (:~
  : The MVC-XQuery controller function library module.
  :
@@ -10,9 +8,10 @@ module namespace c = "controller";
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.0.2
+ : @version v0.1.0
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : April 3, 2018
+ : April 6, 2018
+ : @since v0.0.2
  :
  : This program is free software: you can redistribute it and/or modify
  : it under the terms of the GNU General Public License as published by
@@ -29,8 +28,32 @@ module namespace c = "controller";
  :
  : LICENSE: GNU General Public License
  : @see: https://github.com/AdamSteffanick/mvc-xquery/blob/master/LICENSE
- :
  :)
+module namespace c = "controller";
 
+(: required function library modules :)
 import module namespace m = "model" at "model.xquery";
 import module namespace v = "view" at "view.xquery";
+
+(:~
+ : A function to return an HTML5 home page to the user.
+ :
+ : @author Adam Steffanick
+ : @see https://www.steffanick.com/adam/
+ : @version v1.0.0
+ : @since v0.1.0
+ :
+ : @return an HTML5 home page
+ :)
+declare
+%rest:path("/")
+%rest:GET
+%output:method("html")
+%output:version("5.0")
+%output:indent("no")
+function c:home(
+)
+{
+  m:html5()
+  => v:html()
+};

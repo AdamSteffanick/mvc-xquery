@@ -10,11 +10,25 @@ Copyright (C) 2018 [Adam Steffanick](https://www.steffanick.com/adam/)
 * [**Latest release**](https://github.com/AdamSteffanick/mvc-xquery/releases/latest)
 
 ## Documentation
-BaseX 9.0:
-
+### BaseX 9.0:
 * Download this repository and place all files within the appropriate subdirectories of `basex`
 * Modify [model.xquery], [view.xquery], and [controller.xquery] as needed
 * Run the [BaseX HTTP Server](http://docs.basex.org/wiki/Startup#HTTP_Server)
+* Navigate to http://localhost:8984 in your browser
+
+### Default output:
+```
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>MVC-XQuery | A Model-View-Controller framework for BaseX</title>
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+  </body>
+</html>
+```
 
 ## Manifest tree
 The `mvc-xquery` directory should contain:
@@ -39,7 +53,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 [CHANGELOG]: ./CHANGELOG.md
-[version-badge]: https://img.shields.io/badge/mvc--xquery-v0.0.2-0038e2.svg?style=flat-square
+[version-badge]: https://img.shields.io/badge/mvc--xquery-v0.1.0-0038e2.svg?style=flat-square
 [LICENSE]: ./LICENSE
 [license-badge]: https://img.shields.io/badge/license-GPL-0038e2.svg?style=flat-square
 
