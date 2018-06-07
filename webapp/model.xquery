@@ -8,9 +8,9 @@ xquery version "3.1" encoding "UTF-8";
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.1.0
+ : @version v0.1.1
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : April 6, 2018
+ : June 7, 2018
  : @since v0.0.2
  :
  : This program is free software: you can redistribute it and/or modify
@@ -302,10 +302,10 @@ declare %private function m:html5-filter(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.1.0
  :
- : @param (optional) $options is a sequence of zero or one map items
+ : @param (optional) $parameter is a sequence of zero or one map items
  : @return one minimal HTML5 head element containing optional elements
  :)
 declare function m:html5-head(
@@ -322,20 +322,20 @@ declare function m:html5-head(
   )
 };
 declare function m:html5-head(
-  $options as map(*)?
+  $parameter as map(*)?
 ) as element(head)
 {
   let $head := (
     element head {
-      m:html5-head-meta(map:get($options, "meta")),
-      m:html5-base(map:get($options, "base")),
-      m:html5-title(map:get($options, "title")),
-      m:html5-link(map:get($options, "link")),
-      m:html5-style(map:get($options, "style")),
-      m:html5-script(map:get($options, "script")),
-      m:html5-noscript(map:get($options, "noscript")),
-      m:html5-meta(map:get($options, "metadata")),
-      m:html5-template(map:get($options, "template"))
+      m:html5-head-meta(map:get($parameter, "meta")),
+      m:html5-base(map:get($parameter, "base")),
+      m:html5-title(map:get($parameter, "title")),
+      m:html5-link(map:get($parameter, "link")),
+      m:html5-style(map:get($parameter, "style")),
+      m:html5-script(map:get($parameter, "script")),
+      m:html5-noscript(map:get($parameter, "noscript")),
+      m:html5-meta(map:get($parameter, "metadata")),
+      m:html5-template(map:get($parameter, "template"))
     }
   )
   return (
@@ -348,11 +348,10 @@ declare function m:html5-head(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v2.0.0
  : @since v0.1.0
  :
- : @param (optional) $parameter is a sequence of zero or more items
- : @param (optional) $options is a sequence of zero or one map items
+ : @param (optional) $parameter is a sequence of zero or one map items
  : @return one minimal HTML5 body element containing optional items
  :)
 declare function m:html5-body(
@@ -363,32 +362,13 @@ declare function m:html5-body(
   }
 };
 declare function m:html5-body(
-  $parameter as item()*
+  $parameter as map(*)?
 ) as element(body)
 {
-  let $content := (
-     m:html5-filter($parameter)
-  )
-  return (
-    element body {
-      $content
-    }
-  )
-};
-declare function m:html5-body(
-  $parameter as item()*,
-  $options as map(*)?
-) as element(body)
-{
-  let $content := (
-     m:html5-filter($parameter)
-  )
-  return (
-    element body {
-      $content,
-      m:html5-script(map:get($options, "script"))
-    }
-  )
+  element body {
+    m:html5-filter(map:get($parameter, "content")),
+    m:html5-script(map:get($parameter, "script"))
+  }
 };
 
 (:~
@@ -396,12 +376,10 @@ declare function m:html5-body(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v2.0.0
  : @since v0.1.0
  :
- : @param (optional) $head is one head element
- : @param (optional) $body is one body element
- : @param (optional) $options is a sequence of zero or one map items
+ : @param (optional) $parameter is a sequence of zero or one map items
  : @return one minimal HTML5 html element containing optional items
  :)
 declare function m:html5(
@@ -414,37 +392,14 @@ declare function m:html5(
   }
 };
 declare function m:html5(
-  $head as element(head)
-) as element(html)
-{
-  element html {
-    m:html5-lang(()),
-    $head,
-    m:html5-body()
-  }
-};
-declare function m:html5(
-  $head as element(head),
-  $body as element(body)
-) as element(html)
-{
-  element html {
-    m:html5-lang(()),
-    $head,
-    $body
-  }
-};
-declare function m:html5(
-  $head as element(head),
-  $body as element(body),
-  $options as map(*)?
+  $parameter as map(*)?
 ) as element(html)
 {
   let $html := (
     element html {
-      m:html5-lang(map:get($options, "lang")),
-      $head,
-      $body
+      m:html5-lang(map:get($parameter, "lang")),
+      map:get($parameter, "head"),
+      map:get($parameter, "body")
     }
   )
   return (

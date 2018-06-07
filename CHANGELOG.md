@@ -5,6 +5,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [0.1.1] - 2018-06-07
+### Changed
+* `m:html5()` @param `$options` → `$parameter` ([model.xquery])
+* `m:html5-body()` @param `$parameter as item()*` → `$parameter as map(*)?` ([model.xquery])
+* `m:html5-head()` @param `$parameter as item()*` → `$parameter as map(*)?` ([model.xquery])
+
+### Removed
+* `m:html5()` @param `$body` ([model.xquery])
+* `m:html5()` @param `$head` ([model.xquery])
+* `m:html5-body()` @param `$options` ([model.xquery])
+* `m:html5-head()` @param `$options` ([model.xquery])
+
 ## [0.1.0] - 2018-04-06
 ### Added
 * `c:home()` ([controller.xquery])
