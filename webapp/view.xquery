@@ -8,9 +8,9 @@ xquery version "3.1" encoding "UTF-8";
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.1.1
+ : @version v0.2.0
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : June 7, 2018
+ : September 25, 2018
  : @since v0.0.2
  :
  : This program is free software: you can redistribute it and/or modify

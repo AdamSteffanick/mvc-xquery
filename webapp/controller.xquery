@@ -8,9 +8,9 @@ xquery version "3.1" encoding "UTF-8";
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.1.1
+ : @version v0.2.0
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : June 7, 2018
+ : September 25, 2018
  : @since v0.0.2
  :
  : This program is free software: you can redistribute it and/or modify
@@ -34,6 +34,9 @@ module namespace c = "controller";
 (: required function library modules :)
 import module namespace m = "model" at "model.xquery";
 import module namespace v = "view" at "view.xquery";
+
+(: optional, included function library modules :)
+import module namespace bootstrap = "bootstrap" at "modules/bootstrap.xquery";
 
 (:~
  : A function to return an HTML5 home page to the user.

@@ -5,6 +5,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [0.2.0] - 2018-09-25
+### Added
+* [/webapp/modules/]
+* [bootstrap.xquery]
+* `bootstrap:card()` ([bootstrap.xquery])
+* `bootstrap:card-layout()` ([bootstrap.xquery])
+* `bootstrap:container()` ([bootstrap.xquery])
+* `bootstrap:javascript()` ([bootstrap.xquery])
+* `bootstrap:list-group()` ([bootstrap.xquery])
+* `bootstrap:meta()` ([bootstrap.xquery])
+* `bootstrap:navbar()` ([bootstrap.xquery])
+* `bootstrap:navbar-brand()` ([bootstrap.xquery])
+* `bootstrap:navbar-ul()` ([bootstrap.xquery])
+* `bootstrap:navbar-search()` ([bootstrap.xquery])
+* `bootstrap:stylesheet()` ([bootstrap.xquery])
+
 ## [0.1.1] - 2018-06-07
 ### Changed
 * `m:html5()` @param `$options` → `$parameter` ([model.xquery])
@@ -54,7 +70,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 * [LISENCE]
 * [README.md]
 
-[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.0.2...v0.1.0
 [0.0.2]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.0.1...v0.0.2
@@ -66,8 +83,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 [README.md]: ./README.md
 
 [/webapp/]: ./webapp/
+[/webapp/modules/]: ./webapp/modules/
 [model.xquery]: ./webapp/model.xquery
 [view.xquery]: ./webapp/view.xquery
 [controller.xquery]: ./webapp/controller.xquery
+[bootstrap.xquery]: ./webapp/modules/bootstrap.xquery
 
 [shields.io]: http://shields.io/
