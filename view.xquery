@@ -1,16 +1,16 @@
 xquery version "3.1" encoding "UTF-8";
 
 (:~
- : The MVC-XQuery controller function library module.
+ : The MVC-XQuery view function library module.
  :
  : MVC-XQuery | A Model-View-Controller framework for BaseX
  : Copyright (C) 2018 Adam Steffanick
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.2.0
+ : @version v0.2.1
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : September 25, 2018
+ : February 11, 2019
  : @since v0.0.2
  :
  : This program is free software: you can redistribute it and/or modify
@@ -29,34 +29,22 @@ xquery version "3.1" encoding "UTF-8";
  : LICENSE: GNU General Public License
  : @see: https://github.com/AdamSteffanick/mvc-xquery/blob/master/LICENSE
  :)
-module namespace c = "controller";
-
-(: required function library modules :)
-import module namespace m = "model" at "model.xquery";
-import module namespace v = "view" at "view.xquery";
-
-(: optional, included function library modules :)
-import module namespace bootstrap = "bootstrap" at "modules/bootstrap.xquery";
+module namespace v = "view";
 
 (:~
- : A function to return an HTML5 home page to the user.
+ : A function to return HTML to the user.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
  : @version v1.0.0
  : @since v0.1.0
  :
- : @return an HTML5 home page
+ : @param $html is one html element
+ : @return one html element
  :)
-declare
-%rest:path("/")
-%rest:GET
-%output:method("html")
-%output:version("5.0")
-%output:indent("no")
-function c:home(
-)
+declare function v:html(
+  $html as element(html)
+) as element(html)
 {
-  m:html5()
-  => v:html()
+  $html
 };

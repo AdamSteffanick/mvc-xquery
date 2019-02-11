@@ -5,9 +5,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [0.2.1] - 2019-02-11
+### Changed
+* /webapp/modules/ → [/modules/]
+
+### Removed
+* /webapp/
+
 ## [0.2.0] - 2018-09-25
 ### Added
-* [/webapp/modules/]
+* /webapp/modules/
 * [bootstrap.xquery]
 * `bootstrap:card()` ([bootstrap.xquery])
 * `bootstrap:card-layout()` ([bootstrap.xquery])
@@ -54,7 +61,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [0.0.2] - 2018-04-03
 ### Added
-* [/webapp/]
+* /webapp/
 * [model.xquery]
 * [view.xquery]
 * [controller.xquery]
@@ -70,7 +77,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 * [LISENCE]
 * [README.md]
 
-[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.0.2...v0.1.0
@@ -82,11 +90,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 [LISENCE]: https://github.com/AdamSteffanick/mvc-xquery/blob/master/LICENSE
 [README.md]: ./README.md
 
-[/webapp/]: ./webapp/
-[/webapp/modules/]: ./webapp/modules/
-[model.xquery]: ./webapp/model.xquery
-[view.xquery]: ./webapp/view.xquery
-[controller.xquery]: ./webapp/controller.xquery
-[bootstrap.xquery]: ./webapp/modules/bootstrap.xquery
+[/modules/]: ./modules/
+[model.xquery]: ./model.xquery
+[view.xquery]: ./view.xquery
+[controller.xquery]: ./controller.xquery
+[bootstrap.xquery]: ./modules/bootstrap.xquery
 
 [shields.io]: http://shields.io/
