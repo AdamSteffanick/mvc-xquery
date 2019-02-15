@@ -76,7 +76,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 [CHANGELOG]: ./CHANGELOG.md
-[version-badge]: https://img.shields.io/badge/mvc--xquery-v0.2.1-0038e2.svg?style=flat-square
+[version-badge]: https://img.shields.io/badge/mvc--xquery-v0.2.2-0038e2.svg?style=flat-square
 [LICENSE]: ./LICENSE
 [license-badge]: https://img.shields.io/badge/license-GPL-0038e2.svg?style=flat-square
 
