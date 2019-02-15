@@ -8,9 +8,9 @@ xquery version "3.1" encoding "UTF-8";
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.2.1
+ : @version v0.2.2
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : February 11, 2019
+ : February 15, 2019
  : @since v0.0.2
  :
  : This program is free software: you can redistribute it and/or modify
@@ -36,13 +36,13 @@ module namespace v = "view";
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.1.0
  :
  : @param $html is one html element
  : @return one html element
  :)
-declare function v:html(
+declare %public function v:html(
   $html as element(html)
 ) as element(html)
 {

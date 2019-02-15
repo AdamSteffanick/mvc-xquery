@@ -8,9 +8,9 @@ xquery version "3.1" encoding "UTF-8";
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.2.1
+ : @version v0.2.2
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : February 11, 2019
+ : February 15, 2019
  : @since v0.0.2
  :
  : This program is free software: you can redistribute it and/or modify
@@ -302,13 +302,13 @@ declare %private function m:html5-filter(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.1
+ : @version v1.0.2
  : @since v0.1.0
  :
  : @param (optional) $parameter is a sequence of zero or one map items
  : @return one minimal HTML5 head element containing optional elements
  :)
-declare function m:html5-head(
+declare %private function m:html5-head(
 ) as element(head)
 {
   let $head := (
@@ -321,7 +321,7 @@ declare function m:html5-head(
     $head
   )
 };
-declare function m:html5-head(
+declare %private function m:html5-head(
   $parameter as map(*)?
 ) as element(head)
 {
@@ -348,20 +348,20 @@ declare function m:html5-head(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.0
+ : @version v2.0.1
  : @since v0.1.0
  :
  : @param (optional) $parameter is a sequence of zero or one map items
  : @return one minimal HTML5 body element containing optional items
  :)
-declare function m:html5-body(
+declare %private function m:html5-body(
 ) as element(body)
 {
   element body {
     m:html5-filter(())
   }
 };
-declare function m:html5-body(
+declare %private function m:html5-body(
   $parameter as map(*)?
 ) as element(body)
 {
@@ -372,17 +372,155 @@ declare function m:html5-body(
 };
 
 (:~
+ : A function to refine the m:html5() parameter.
+ :
+ : @author Adam Steffanick
+ : @see https://www.steffanick.com/adam/
+ : @version v1.0.0
+ : @since v0.2.2
+ :
+ : @param $parameter is a sequence of one or more map items
+ : @return one map item for use with m:html5()
+ :)
+declare %private function m:html5-refine(
+  $parameter as map(*)+
+) as map(*)
+{
+  let $refined-input := (
+    let $unrefined-input := (
+      (
+        $parameter
+        => map:merge(map {"duplicates" : "combine"})
+      )
+    )
+    let $merged-input := (
+      let $simplex-maps := (
+        for $key in map:keys($unrefined-input)
+        where (
+          $key = "lang"
+        )
+        return (
+          map {
+            $key : (
+              map:get($unrefined-input, $key)
+            )
+          }
+        )
+      )
+      let $complex-maps := (
+        for $key in map:keys($unrefined-input)
+        where (
+          $key = "head"
+          or $key = "body"
+        )
+        return (
+          map {
+            $key : (
+              if (
+                fn:count(map:get($unrefined-input, $key)) > 1
+              )
+              then (
+                let $values := (
+                  map:get($unrefined-input, $key)
+                  => map:merge(map {"duplicates" : "combine"})
+                )
+                return (
+                  $values
+                )
+              )
+              else (
+                map:get($unrefined-input, $key)
+              )
+  
+            )
+          }
+        )      
+      )
+      return (
+        $simplex-maps,
+        $complex-maps
+      )
+    ) => map:merge()
+    let $clean-input := (
+      for $key in map:keys($merged-input)
+      return (
+        map {
+          $key : (
+            if (
+              $key = "lang"
+            )
+            then (
+              $merged-input
+              => map:get($key)
+              => fn:reverse()
+              => fn:head()
+            )
+            else if (
+              $key = "head"
+            )
+            then (
+              map:merge(
+                for $child-map in map:get($merged-input, $key)
+                return (
+                  for $child-key in map:keys($child-map)
+                  return (
+                    map {
+                      $child-key : (
+                        if (
+                          $child-key = "base"
+                          or $child-key = "title"
+                          or $child-key = "no-script"
+                          or $child-key = "template"
+                        )
+                        then (
+                          map:get($child-map, $child-key)
+                          => fn:reverse()
+                          => fn:head()
+                        )
+                        else (
+                          map:get($child-map, $child-key)
+                        )
+                      )
+                    }
+                  )
+                )
+              )
+            )
+            else if (
+              $key = "body"
+            )
+            then(
+              for $child-map in map:get($merged-input, $key)
+              return (
+                $child-map
+              )
+            )
+          )
+        }
+      )
+    )
+    return (
+      $clean-input
+      => map:merge()
+    )
+  )
+  return (
+    $refined-input
+  )
+};
+
+(:~
  : A function to return a minimal HTML5 html element and optional items.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.0
+ : @version v2.0.1
  : @since v0.1.0
  :
- : @param (optional) $parameter is a sequence of zero or one map items
+ : @param (optional) $parameter is a sequence of one or more map items
  : @return one minimal HTML5 html element containing optional items
  :)
-declare function m:html5(
+declare %public function m:html5(
 ) as element(html)
 {
   element html {
@@ -391,15 +529,18 @@ declare function m:html5(
     m:html5-body()
   }
 };
-declare function m:html5(
-  $parameter as map(*)?
+declare %public function m:html5(
+  $parameter as map(*)+
 ) as element(html)
 {
+  let $refined-input := (
+    m:html5-refine($parameter)
+  )
   let $html := (
     element html {
-      m:html5-lang(map:get($parameter, "lang")),
-      map:get($parameter, "head"),
-      map:get($parameter, "body")
+      m:html5-lang(map:get($refined-input, "lang")),
+      m:html5-head(map:get($refined-input, "head")),
+      m:html5-body(map:get($refined-input, "body"))
     }
   )
   return (

@@ -1,16 +1,16 @@
 xquery version "3.1" encoding "UTF-8";
 
 (:~
- : The MVC-XQuery Bootstrap v4.1.3 function library module.
+ : The MVC-XQuery Bootstrap v4.2.1 function library module.
  :
  : MVC-XQuery | A Model-View-Controller framework for BaseX
  : Copyright (C) 2018 Adam Steffanick
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.2.1
+ : @version v0.2.2
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : February 11, 2019
+ : February 15, 2019
  : @since v0.2.0
  :
  : This program is free software: you can redistribute it and/or modify
@@ -32,16 +32,37 @@ xquery version "3.1" encoding "UTF-8";
 module namespace bootstrap = "bootstrap";
 
 (:~
- : A function to return required Bootstrap meta elements.
+ : A public variable containing minimal Bootstrap template requirements.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
  : @version v1.0.0
+ : @since v0.2.2
+ :
+ : @return one map containing minimal Bootstrap template requirements
+ :)
+declare %public variable $bootstrap:template as map(*) := map
+{
+  "head" : map {
+    "meta" : bootstrap:meta(),
+    "link" : bootstrap:stylesheet()
+  },
+  "body" : map {
+    "script" : bootstrap:javascript()
+  }
+};
+
+(:~
+ : A function to return required Bootstrap meta elements.
+ :
+ : @author Adam Steffanick
+ : @see https://www.steffanick.com/adam/
+ : @version v1.0.1
  : @since v0.2.0
  :
  : @return a sequence of required Bootstrap meta elements
  :)
-declare function bootstrap:meta(
+declare %public function bootstrap:meta(
 ) as element(meta)
 {
   element meta {
@@ -59,12 +80,12 @@ declare function bootstrap:meta(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.2
  : @since v0.2.0
  :
  : @return one Bootstrap link element referencing an external stylesheet
  :)
-declare function bootstrap:stylesheet(
+declare %public function bootstrap:stylesheet(
 ) as element(link)
 {
   element link {
@@ -72,10 +93,10 @@ declare function bootstrap:stylesheet(
       "stylesheet"
     },
     attribute href {
-      "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     },
     attribute integrity {
-      "sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      "sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
     },
     attribute crossorigin {
       "anonymous"
@@ -88,12 +109,12 @@ declare function bootstrap:stylesheet(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.2
  : @since v0.2.0
  :
  : @return a sequence of Bootstrap script elements referncing external JavaScript
  :)
-declare function bootstrap:javascript(
+declare %public function bootstrap:javascript(
 ) as element(script)*
 {
   element script {
@@ -109,10 +130,10 @@ declare function bootstrap:javascript(
   },
   element script {
     attribute src {
-      "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
     },
     attribute integrity {
-      "sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      "sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
     },
     attribute crossorigin {
       "anonymous"
@@ -120,10 +141,10 @@ declare function bootstrap:javascript(
   },
   element script {
     attribute src {
-      "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
     },
     attribute integrity {
-      "sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      "sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
     },
     attribute crossorigin {
       "anonymous"
@@ -136,13 +157,13 @@ declare function bootstrap:javascript(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.2.0
  :
  : @param $parameter is a string
  : @return one Bootstrap navbar brand as a heading
  :)
-declare function bootstrap:navbar-brand(
+declare %public function bootstrap:navbar-brand(
   $parameter as xs:string
 ) as element(span)
 {
@@ -159,13 +180,13 @@ declare function bootstrap:navbar-brand(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.2.0
  :
  : @param $parameter is a CSV string with header values: parent,loc,name
  : @return one Bootstrap navbar ul element
  :)
-declare function bootstrap:navbar-ul(
+declare %public function bootstrap:navbar-ul(
   $parameter as xs:string
 ) as element(ul)
 {
@@ -293,7 +314,7 @@ declare function bootstrap:navbar-ul(
                     || $child/loc/text()
                   },
                   $child/name/text()
-                }                
+                }
               )
             }
           }
@@ -308,12 +329,12 @@ declare function bootstrap:navbar-ul(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.2.0
  :
  : @return one Bootstrap navbar search form
  :)
-declare function bootstrap:navbar-search(
+declare %public function bootstrap:navbar-search(
 ) as element(form)
 {
   element form {
@@ -360,13 +381,13 @@ declare function bootstrap:navbar-search(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.2.0
  :
  : @param $parameter is one Bootstrap navbar ul element
  : @return one Bootstrap navbar
  :)
-declare function bootstrap:navbar(
+declare %public function bootstrap:navbar(
   $parameter as item()*
 ) as element(nav)
 {
@@ -419,13 +440,13 @@ declare function bootstrap:navbar(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.2.0
  :
  : @param $parameter is a sequence of zero or more items
  : @return one Bootstrap container
  :)
-declare function bootstrap:container(
+declare %public function bootstrap:container(
   $parameter as item()*
 ) as element(div)
 {
@@ -442,13 +463,13 @@ declare function bootstrap:container(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.2.0
  :
  : @param $parameter is a sequence of zero or more items
  : @return one Bootstrap card
  :)
-declare function bootstrap:card(
+declare %public function bootstrap:card(
   $parameter as item()*
 ) as element(div)
 {
@@ -465,14 +486,14 @@ declare function bootstrap:card(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.2.0
  :
  : @param $cards is a sequence of zero or more div elements
  : @param $layout is one string
  : @return one Bootstrap card layout
  :)
-declare function bootstrap:card-layout(
+declare %public function bootstrap:card-layout(
   $cards as element(div)*,
   $layout as xs:string
 ) as element(div)
@@ -500,13 +521,13 @@ declare function bootstrap:card-layout(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.2.0
  :
  : @param $parameter is a sequence of zero or more items
  : @return one Bootstrap list group component
  :)
-declare function bootstrap:list-group(
+declare %public function bootstrap:list-group(
   $parameter as item()*
 ) as element(ul)
 {

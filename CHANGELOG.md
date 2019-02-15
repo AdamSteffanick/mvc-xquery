@@ -5,9 +5,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [0.2.2] - 2019-02-15
+###
+* `$bootstrap:template` ([bootstrap.xquery])
+* `m:html5-refine()` ([model.xquery])
+
+### Changed
+* [bootstrap.xquery] → [Bootstrap] v4.2.1
+* all functions & variables → `%public` or `%private`
+* `m:html5()` @param `$parameter as map(*)?` → `$parameter as map(*)+` ([model.xquery])
+
 ## [0.2.1] - 2019-02-11
 ### Changed
 * /webapp/modules/ → [/modules/]
+* [model.xquery] → /
+* [view.xquery] → /
+* [controller.xquery] → /
 
 ### Removed
 * /webapp/
@@ -96,4 +109,5 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 [controller.xquery]: ./controller.xquery
 [bootstrap.xquery]: ./modules/bootstrap.xquery
 
+[Bootstrap]: https://getbootstrap.com/
 [shields.io]: http://shields.io/
