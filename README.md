@@ -16,7 +16,8 @@ Copyright (C) 2018 [Adam Steffanick](https://www.steffanick.com/adam/)
 * Run the [BaseX HTTP Server](http://docs.basex.org/wiki/Startup#HTTP_Server)
 * Navigate to http://localhost:8984 in your browser
 
-### m:html5() default output:
+### Default output
+#### m:html5()
 ```
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +31,7 @@ Copyright (C) 2018 [Adam Steffanick](https://www.steffanick.com/adam/)
 </html>
 ```
 
-### m:html5($bootstrap:template) default output:
+#### m:html5($bootstrap:template)
 ```
 <html lang="en">
   <head>
@@ -76,7 +77,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 [CHANGELOG]: ./CHANGELOG.md
-[version-badge]: https://img.shields.io/badge/mvc--xquery-v0.2.2-0038e2.svg?style=flat-square
+[version-badge]: https://img.shields.io/badge/mvc--xquery-v0.2.3-0038e2.svg?style=flat-square
 [LICENSE]: ./LICENSE
 [license-badge]: https://img.shields.io/badge/license-GPL-0038e2.svg?style=flat-square
 

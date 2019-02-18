@@ -5,6 +5,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [0.2.3] - 2019-02-18
+### Added
+* `bootstrap:navbar-search()` @param `$parameter` ([bootstrap.xquery])
+
+### Fixed
+* `m:html5-body` empty sequence bug ([model.xquery])
+* `m:html5-head` empty sequence bug ([model.xquery])
+* refactored `m:html5-refine()` ([model.xquery])
+
 ## [0.2.2] - 2019-02-15
 ### Added
 * `$bootstrap:template` ([bootstrap.xquery])
@@ -90,7 +99,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 * [LISENCE]
 * [README.md]
 
-[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.2...HEAD
+[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.3...HEAD
+[0.2.3]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.1.1...v0.2.0

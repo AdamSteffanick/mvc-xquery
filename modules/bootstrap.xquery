@@ -8,9 +8,9 @@ xquery version "3.1" encoding "UTF-8";
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.2.2
+ : @version v0.2.3
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : February 15, 2019
+ : February 18, 2019
  : @since v0.2.0
  :
  : This program is free software: you can redistribute it and/or modify
@@ -72,7 +72,7 @@ declare %public function bootstrap:meta(
     attribute content {
       "width=device-width, initial-scale=1, shrink-to-fit=no"
     }
-  }  
+  }
 };
 
 (:~
@@ -101,7 +101,7 @@ declare %public function bootstrap:stylesheet(
     attribute crossorigin {
       "anonymous"
     }
-  }  
+  }
 };
 
 (:~
@@ -243,7 +243,7 @@ declare %public function bootstrap:navbar-ul(
               },
               $item/name/text()
             }
-          }     
+          }
         )
         else (
           element li {
@@ -321,7 +321,7 @@ declare %public function bootstrap:navbar-ul(
         )
       )
     }
-  ) 
+  )
 };
 
 (:~
@@ -329,9 +329,10 @@ declare %public function bootstrap:navbar-ul(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.1
+ : @version v2.0.0
  : @since v0.2.0
  :
+ : @param (optional) $parameter is a sequence of zero or one map items
  : @return one Bootstrap navbar search form
  :)
 declare %public function bootstrap:navbar-search(
@@ -374,6 +375,74 @@ declare %public function bootstrap:navbar-search(
       "Search"
     }
   }
+};
+declare %public function bootstrap:navbar-search(
+  $parameter as map(*)?
+) as element(form)
+{
+  let $name := (
+    if (
+      map:get($parameter, "name")
+      => fn:empty()
+    )
+    then (
+      "q"
+    )
+    else (
+      map:get($parameter, "name")
+    )
+  )
+  let $formaction := (
+    if (
+      map:get($parameter, "formaction")
+      => fn:empty()
+    )
+    then (
+      "/search/"
+    )
+    else (
+      map:get($parameter, "formaction")
+    )
+  )
+  return (
+    element form {
+      attribute class {
+        "form-inline my-2 my-lg-0"
+      },
+      element input {
+        attribute class {
+          "form-control mr-sm-2"
+        },
+        attribute type {
+          "search"
+        },
+        attribute name {
+          $name
+        },
+        attribute placeholder {
+          "Search"
+        },
+        attribute required {
+          "required"
+        },
+        attribute aria-label {
+          "Search"
+        }
+      },
+      element button {
+        attribute class {
+          "btn btn-outline-light my-2 my-sm-0"
+        },
+        attribute type {
+          "submit"
+        },
+        attribute formaction {
+          $formaction
+        },
+        "Search"
+      }
+    }
+  )
 };
 
 (:~
@@ -432,7 +501,7 @@ declare %public function bootstrap:navbar(
       },
       $parameter
     }
-  }  
+  }
 };
 
 (:~
@@ -455,7 +524,7 @@ declare %public function bootstrap:container(
       "container"
     },
     $parameter
-  }  
+  }
 };
 
 (:~
@@ -478,7 +547,7 @@ declare %public function bootstrap:card(
       "card"
     },
     $parameter
-  }  
+  }
 };
 
 (:~
@@ -513,7 +582,7 @@ declare %public function bootstrap:card-layout(
       )
     },
     $cards
-  }  
+  }
 };
 
 (:~
@@ -560,5 +629,5 @@ declare %public function bootstrap:list-group(
         }
       }
     )
-  }  
+  }
 };

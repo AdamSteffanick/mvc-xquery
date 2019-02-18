@@ -8,9 +8,9 @@ xquery version "3.1" encoding "UTF-8";
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.2.2
+ : @version v0.2.3
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : February 15, 2019
+ : February 18, 2019
  : @since v0.0.2
  :
  : This program is free software: you can redistribute it and/or modify
@@ -302,7 +302,7 @@ declare %private function m:html5-filter(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.2
+ : @version v1.0.3
  : @since v0.1.0
  :
  : @param (optional) $parameter is a sequence of zero or one map items
@@ -326,17 +326,25 @@ declare %private function m:html5-head(
 ) as element(head)
 {
   let $head := (
-    element head {
-      m:html5-head-meta(map:get($parameter, "meta")),
-      m:html5-base(map:get($parameter, "base")),
-      m:html5-title(map:get($parameter, "title")),
-      m:html5-link(map:get($parameter, "link")),
-      m:html5-style(map:get($parameter, "style")),
-      m:html5-script(map:get($parameter, "script")),
-      m:html5-noscript(map:get($parameter, "noscript")),
-      m:html5-meta(map:get($parameter, "metadata")),
-      m:html5-template(map:get($parameter, "template"))
-    }
+    if (
+      $parameter => fn:empty()
+    )
+    then (
+      m:html5-head()
+    )
+    else (
+      element head {
+        m:html5-head-meta(map:get($parameter, "meta")),
+        m:html5-base(map:get($parameter, "base")),
+        m:html5-title(map:get($parameter, "title")),
+        m:html5-link(map:get($parameter, "link")),
+        m:html5-style(map:get($parameter, "style")),
+        m:html5-script(map:get($parameter, "script")),
+        m:html5-noscript(map:get($parameter, "noscript")),
+        m:html5-meta(map:get($parameter, "metadata")),
+        m:html5-template(map:get($parameter, "template"))
+      }
+    )
   )
   return (
     $head
@@ -348,7 +356,7 @@ declare %private function m:html5-head(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.1
+ : @version v2.0.2
  : @since v0.1.0
  :
  : @param (optional) $parameter is a sequence of zero or one map items
@@ -365,10 +373,18 @@ declare %private function m:html5-body(
   $parameter as map(*)?
 ) as element(body)
 {
-  element body {
-    m:html5-filter(map:get($parameter, "content")),
-    m:html5-script(map:get($parameter, "script"))
-  }
+  if (
+    $parameter => fn:empty()
+  )
+  then (
+    m:html5-body()
+  )
+  else (
+    element body {
+      m:html5-filter(map:get($parameter, "content")),
+      m:html5-script(map:get($parameter, "script"))
+    }
+  )
 };
 
 (:~
@@ -376,7 +392,7 @@ declare %private function m:html5-body(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.2.2
  :
  : @param $parameter is a sequence of one or more map items
@@ -388,10 +404,8 @@ declare %private function m:html5-refine(
 {
   let $refined-input := (
     let $unrefined-input := (
-      (
-        $parameter
-        => map:merge(map {"duplicates" : "combine"})
-      )
+      $parameter
+      => map:merge(map {"duplicates" : "combine"})
     )
     let $merged-input := (
       let $simplex-maps := (
@@ -431,10 +445,9 @@ declare %private function m:html5-refine(
               else (
                 map:get($unrefined-input, $key)
               )
-  
             )
           }
-        )      
+        )
       )
       return (
         $simplex-maps,
