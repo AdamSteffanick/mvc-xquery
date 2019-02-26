@@ -4,7 +4,7 @@
 
 MVC-XQuery | A Model-View-Controller framework for BaseX 
 
-Copyright (C) 2018 [Adam Steffanick](https://www.steffanick.com/adam/)
+Copyright (C) 2018–2019 [Adam Steffanick](https://www.steffanick.com/adam/)
 
 ## Download
 * [**Latest release**](https://github.com/AdamSteffanick/mvc-xquery/releases/latest)
@@ -17,12 +17,11 @@ Copyright (C) 2018 [Adam Steffanick](https://www.steffanick.com/adam/)
 * Navigate to http://localhost:8984 in your browser
 
 ### Default output
-#### m:html5()
+#### `html5:html()`
 ```
-<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8"/>
     <title>MVC-XQuery | A Model-View-Controller framework for BaseX</title>
   </head>
   <body>
@@ -31,14 +30,14 @@ Copyright (C) 2018 [Adam Steffanick](https://www.steffanick.com/adam/)
 </html>
 ```
 
-#### m:html5($bootstrap:template)
+#### `html5:html($bootstrap:template)`
 ```
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <title>MVC-XQuery | A Model-View-Controller framework for BaseX</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
   </head>
   <body>
     <h1>Hello, world!</h1>
@@ -51,6 +50,7 @@ Copyright (C) 2018 [Adam Steffanick](https://www.steffanick.com/adam/)
 
 ## Features
 * [Bootstrap] v4.2.1 support
+* [HTML5] v5.2 support
 
 ## Manifest tree
 MVC-XQuery should contain:
@@ -63,10 +63,11 @@ mvc-xquery
 ├── controller.xquery
 ├── model.xquery
 ├── modules
-│   └── bootstrap.xquery
+│   ├── bootstrap.xquery
+│   └── html5.xquery
 └── view.xquery
 
-1 directory, 7 files
+1 directory, 8 files
 ```
 
 ## License
@@ -77,7 +78,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 [CHANGELOG]: ./CHANGELOG.md
-[version-badge]: https://img.shields.io/badge/mvc--xquery-v0.2.3-0038e2.svg?style=flat-square
+[version-badge]: https://img.shields.io/badge/mvc--xquery-v0.3.0-0038e2.svg?style=flat-square
 [LICENSE]: ./LICENSE
 [license-badge]: https://img.shields.io/badge/license-GPL-0038e2.svg?style=flat-square
 
@@ -86,3 +87,4 @@ You should have received a copy of the GNU General Public License along with thi
 [controller.xquery]: ./controller.xquery
 
 [Bootstrap]: https://getbootstrap.com/
+[HTML5]: https://www.w3.org/TR/html52/

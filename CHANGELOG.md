@@ -5,6 +5,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [0.3.0] - 2019-02-26
+### Added
+* [html5.xquery]
+* `html5:element()` ([html5.xquery])
+* `m:home()` ([model.xquery])
+
+### Changed
+* `m:html5()` ([model.xquery]) → `html5:html()` ([html5.xquery])
+* `m:html5-base()` ([model.xquery]) → `html5:base()` ([html5.xquery])
+* `m:html5-body()` ([model.xquery]) → `html5:body()` ([html5.xquery])
+* `m:html5-filter()` ([model.xquery]) → `html5:html-filter()` ([html5.xquery])
+* `m:html5-head()` ([model.xquery]) → `html5:head()` ([html5.xquery])
+* `m:html5-head-meta()` ([model.xquery]) → `html5:meta-priority()` ([html5.xquery])
+* `m:html5-link()` ([model.xquery]) → `html5:link()` ([html5.xquery])
+* `m:html5-lang()` ([model.xquery]) → html5:lang()` ([html5.xquery])
+* `m:html5-meta()` ([model.xquery]) → `html5:meta()` ([html5.xquery])
+* `m:html5-noscript()` ([model.xquery]) → `html5:noscript()` ([html5.xquery])
+* `m:html5-refine()` ([model.xquery]) → `html5:html-refine` ([html5.xquery])
+* `m:html5-script()` ([model.xquery]) → `html5:script()` ([html5.xquery])
+* `m:html5-style()` ([model.xquery]) → `html5:style()` ([html5.xquery])
+* `m:html5-template()` ([model.xquery]) → `html5:template()` ([html5.xquery])
+* `m:html5-title()` ([model.xquery]) → `html5:title()` ([html5.xquery])
+
 ## [0.2.3] - 2019-02-18
 ### Added
 * `bootstrap:navbar-search()` @param `$parameter` ([bootstrap.xquery])
@@ -99,7 +122,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 * [LISENCE]
 * [README.md]
 
-[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.3...HEAD
+[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.3...v0.3.0
 [0.2.3]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.0...v0.2.1
@@ -114,11 +138,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 [LISENCE]: https://github.com/AdamSteffanick/mvc-xquery/blob/master/LICENSE
 [README.md]: ./README.md
 
-[/modules/]: ./modules/
+[controller.xquery]: ./controller.xquery
 [model.xquery]: ./model.xquery
 [view.xquery]: ./view.xquery
-[controller.xquery]: ./controller.xquery
+
+[/modules/]: ./modules/
 [bootstrap.xquery]: ./modules/bootstrap.xquery
+[html5.xquery]: ./modules/html5.xquery
 
 [Bootstrap]: https://getbootstrap.com/
 [shields.io]: http://shields.io/
