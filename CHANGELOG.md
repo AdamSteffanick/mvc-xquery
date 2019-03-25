@@ -5,6 +5,26 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [0.4.0] - 2019-03-25
+### Added
+* [mvc.xquery]
+* `$mvc:brand` ([mvc.xquery])
+* `$mvc:brand-description` ([mvc.xquery])
+* `$mvc:paths` ([mvc.xquery])
+* `$mvc:template` ([mvc.xquery])
+* `$mvc:title` ([mvc.xquery])
+* `$mvc:version` ([mvc.xquery])
+* `mvc:list-paths()` ([mvc.xquery])
+
+### Changed
+* [Bootstrap] → v4.3.1 ([bootstrap.xquery])
+* `html5:html-refine()` ([html5.xquery]) → `mvc:html-refine()` ([mvc.xquery])
+* refactored `bootstrap:navbar-brand()` ([bootstrap.xquery])
+* refactored `bootstrap:navbar-search()` ([bootstrap.xquery])
+* refactored `bootstrap:navbar-ul()` ([bootstrap.xquery])
+* refactored `html5:html()` ([html5.xquery])
+* refactored `html5:title()` ([html5.xquery])
+
 ## [0.3.0] - 2019-02-26
 ### Added
 * [html5.xquery]
@@ -19,7 +39,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 * `m:html5-head()` ([model.xquery]) → `html5:head()` ([html5.xquery])
 * `m:html5-head-meta()` ([model.xquery]) → `html5:meta-priority()` ([html5.xquery])
 * `m:html5-link()` ([model.xquery]) → `html5:link()` ([html5.xquery])
-* `m:html5-lang()` ([model.xquery]) → html5:lang()` ([html5.xquery])
+* `m:html5-lang()` ([model.xquery]) → `html5:lang()` ([html5.xquery])
 * `m:html5-meta()` ([model.xquery]) → `html5:meta()` ([html5.xquery])
 * `m:html5-noscript()` ([model.xquery]) → `html5:noscript()` ([html5.xquery])
 * `m:html5-refine()` ([model.xquery]) → `html5:html-refine` ([html5.xquery])
@@ -43,7 +63,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 * `m:html5-refine()` ([model.xquery])
 
 ### Changed
-* [bootstrap.xquery] → [Bootstrap] v4.2.1
+* [Bootstrap] → v4.2.1 ([bootstrap.xquery])
 * all functions & variables → `%public` or `%private`
 * `m:html5()` @param `$parameter as map(*)?` → `$parameter as map(*)+` ([model.xquery])
 
@@ -122,7 +142,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 * [LISENCE]
 * [README.md]
 
-[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.3...v0.3.0
 [0.2.3]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.1...v0.2.2
@@ -145,6 +166,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 [/modules/]: ./modules/
 [bootstrap.xquery]: ./modules/bootstrap.xquery
 [html5.xquery]: ./modules/html5.xquery
+[mvc.xquery]: ./modules/mvc.xquery
 
 [Bootstrap]: https://getbootstrap.com/
 [shields.io]: http://shields.io/

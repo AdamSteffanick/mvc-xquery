@@ -3,14 +3,14 @@ xquery version "3.1" encoding "UTF-8";
 (:~
  : The MVC-XQuery Bootstrap v4.2.1 function library module.
  :
- : MVC-XQuery | A Model-View-Controller framework for BaseX
+ : MVC-XQuery | A Model-View-Controller framework in XQuery for BaseX
  : Copyright (C) 2018–2019 Adam Steffanick
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.3.0
+ : @version v0.4.0
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : February 26, 2019
+ : March 25, 2019
  : @since v0.2.0
  :
  : This program is free software: you can redistribute it and/or modify
@@ -31,15 +31,18 @@ xquery version "3.1" encoding "UTF-8";
  :)
 module namespace bootstrap = "bootstrap";
 
+(: required function library modules :)
+import module namespace html5 = "html5" at "html5.xquery";
+
 (:~
  : A public variable containing minimal Bootstrap template requirements.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.2.2
  :
- : @return one map containing minimal Bootstrap template requirements
+ : @return one MVC-XQuery template map item with Bootstrap requirements
  :)
 declare %public variable $bootstrap:template as map(*) := map
 {
@@ -53,11 +56,11 @@ declare %public variable $bootstrap:template as map(*) := map
 };
 
 (:~
- : A function to return required Bootstrap meta elements.
+ : A public function to return required Bootstrap meta elements.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.1
+ : @version v1.0.2
  : @since v0.2.0
  :
  : @return a sequence of required Bootstrap meta elements
@@ -76,11 +79,11 @@ declare %public function bootstrap:meta(
 };
 
 (:~
- : A function to return Bootstrap CSS.
+ : A public function to return Bootstrap CSS.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.2
+ : @version v1.1.0
  : @since v0.2.0
  :
  : @return one Bootstrap link element referencing an external stylesheet
@@ -105,11 +108,11 @@ declare %public function bootstrap:stylesheet(
 };
 
 (:~
- : A function to return Bootstrap optional JavaScript.
+ : A public function to return Bootstrap optional JavaScript.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.2
+ : @version v1.1.0
  : @since v0.2.0
  :
  : @return a sequence of Bootstrap script elements referncing external JavaScript
@@ -130,10 +133,10 @@ declare %public function bootstrap:javascript(
   },
   element script {
     attribute src {
-      "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     },
     attribute integrity {
-      "sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      "sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
     },
     attribute crossorigin {
       "anonymous"
@@ -141,10 +144,10 @@ declare %public function bootstrap:javascript(
   },
   element script {
     attribute src {
-      "https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     },
     attribute integrity {
-      "sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      "sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     },
     attribute crossorigin {
       "anonymous"
@@ -153,171 +156,151 @@ declare %public function bootstrap:javascript(
 };
 
 (:~
- : A function to return a Bootstrap navbar component brand.
+ : A public function to return a Bootstrap navbar component brand.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.1
+ : @version v1.1.0
  : @since v0.2.0
  :
  : @param $parameter is a string
- : @return one Bootstrap navbar brand as a heading
+ : @return one Bootstrap navbar brand as an a element
  :)
 declare %public function bootstrap:navbar-brand(
   $parameter as xs:string
-) as element(span)
+) as element(a)
 {
-  element span {
-    attribute class {
-      "navbar-brand mb-0 h1"
-    },
-    $parameter
-  }
+  html5:element(
+    map {
+      "name" : "a",
+      "attributes" : map {
+        "class" : "navbar-brand",
+        "href" : "/"
+      },
+      "content" : $parameter
+    }
+  )
 };
 
 (:~
- : A function to return a Bootstrap navbar component list.
+ : A public function to return a Bootstrap navbar component list.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.1
+ : @version v2.0.0
  : @since v0.2.0
  :
- : @param $parameter is a CSV string with header values: parent,loc,name
+ : @param $parameter is a sequence of one or more MVC-XQuery path elements
  : @return one Bootstrap navbar ul element
  :)
 declare %public function bootstrap:navbar-ul(
-  $parameter as xs:string
+  $parameter as element(path)*
 ) as element(ul)
 {
-  let $csv := (
-    csv:parse($parameter, map {"header": true()})
-  )
-  let $dropdowns := (
-    for $dropdown in $csv/csv/record
-    where (
-      $dropdown/parent/text() != "/"
-      and (
-        $dropdown/parent/text()
-        => fn:empty()
-        => fn:not()
-      )
-    )
-    return (
-      $dropdown/parent/text()
-      => fn:distinct-values()
-    )
-  )
-  return (
-    element ul {
-      attribute class {
-        "navbar-nav mr-auto mt-2 mt-lg-0"
+  html5:element(
+    map {
+      "name" : "ul",
+      "attributes" : map {
+        "class" : "navbar-nav mr-auto mt-2 mt-lg-0"
       },
-      for $item in $csv/csv/record
-      where (
-        $item/parent/text()
-        => fn:empty()
-        or  (
-          $item/parent/text() = "/"
+      "content" : (
+        for $path in $parameter
+        where (
+          fn:data($path/@segments) < 2
         )
-      )
-      return (
-        if (
-          $dropdowns
-          => fn:index-of($item/loc/text())
-          => fn:exists()
-          => fn:not()
-        )
-        then (
-          element li {
-            attribute class {
-              "nav-item"
-            },
-            element a {
-              attribute class {
-                "nav-link"
-              },
-              attribute href {
-                $item/parent/text()
-                || $item/loc/text()
-              },
-              $item/name/text()
-            }
-          }
-        )
-        else (
-          element li {
-            attribute class {
-              "nav-item dropdown"
-            },
-            element a {
-              attribute class {
-                "nav-link dropdown-toggle"
-              },
-              attribute href {
-                "#"
-              },
-              attribute id {
-                (
-                  "navbar-"
-                  || $item/loc/text()
-                )
-                => fn:replace("/", "")
-              },
-              attribute role {
-                "button"
-              },
-              attribute data-toggle {
-                "dropdown"
-              },
-              attribute aria-haspopup {
-                "true"
-              },
-              attribute aria-expanded {
-                "false"
-              },
-              $item/name/text()
-            },
-            element div {
-              attribute class {
-                "dropdown-menu"
-              },
-              attribute aria-labelledby {
-                (
-                  "navbar-"
-                  || $item/loc/text()
-                )
-                => fn:replace("/", "")
-              },
-              element a {
-                attribute class {
-                  "dropdown-item"
+        return (
+          if (
+            $path/text() = $parameter/@parent
+            and $path/text() != "/"
+          )
+          then (
+            html5:element(
+              map {
+                "name" : "li",
+                "attributes" : map {
+                  "class" : "nav-item dropdown"
                 },
-                attribute href {
-                  $item/parent/text()
-                  || $item/loc/text()
+                "content" : (
+                  html5:element(
+                    map {
+                      "name" : "a",
+                      "attributes" : map {
+                        "class" : "nav-link dropdown-toggle",
+                        "href" : "#",
+                        "id" : fn:replace("navbar-" || $path/text(), "/", ""),
+                        "role" : "button",
+                        "data-toggle" : "dropdown",
+                        "aria-haspopup" : "true",
+                        "aria-expanded" : "false"
+                      },
+                      "content" : (
+                        fn:data($path/@title)
+                      )
+                    }
+                  ),
+                  html5:element(
+                    map {
+                      "name" : "div",
+                      "attributes" : map {
+                        "class" : "dropdown-menu",
+                        "aria-labelledby" : fn:replace("navbar-" || $path/text(), "/", "")
+                      },
+                      "content" : (
+                        html5:element(
+                          map {
+                            "name" : "a",
+                            "attributes" : map {
+                              "class" : "dropdown-item",
+                              "href" : $path/text()
+                            },
+                            "content" : fn:data($path/@title)
+                          }
+                        ),
+                        for $child in $parameter
+                        where (
+                          fn:data($child/@parent) = $path/text()
+                        )
+                        return (
+                          html5:element(
+                            map {
+                              "name" : "a",
+                              "attributes" : map {
+                                "class" : "dropdown-item",
+                                "href" : $child/text()
+                              },
+                              "content" : fn:data($child/@title)
+                            }
+                          )
+                        )
+                      )
+                    }
+                  )
+                )
+              }
+            )
+          )
+          else (
+            html5:element(
+              map {
+                "name" : "li",
+                "attributes" : map {
+                  "class" : "nav-item"
                 },
-                $item/name/text()
-              },
-              for $child in $csv/csv/record
-              where (
-                $child/parent/text() = $item/loc/text()
-              )
-              return (
-                element a {
-                  attribute class {
-                    "dropdown-item"
-                  },
-                  attribute href {
-                    $item/parent/text()
-                    || $child/parent/text()
-                    || $child/loc/text()
-                  },
-                  $child/name/text()
-                }
-              )
-            }
-          }
+                "content" : html5:element(
+                  map {
+                    "name" : "a",
+                    "attributes" : map {
+                      "class" : "nav-link",
+                      "href" : $path/text()
+                    },
+                    "content" : (
+                      fn:data($path/@title)
+                    )
+                  }
+                )
+              }
+            )
+          )
         )
       )
     }
@@ -325,11 +308,11 @@ declare %public function bootstrap:navbar-ul(
 };
 
 (:~
- : A function to return a Bootstrap navbar component search form.
+ : A public function to return a Bootstrap navbar component search form.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.0
+ : @version v2.1.0
  : @since v0.2.0
  :
  : @param (optional) $parameter is a sequence of zero or one map items
@@ -338,43 +321,40 @@ declare %public function bootstrap:navbar-ul(
 declare %public function bootstrap:navbar-search(
 ) as element(form)
 {
-  element form {
-    attribute class {
-      "form-inline my-2 my-lg-0"
-    },
-    element input {
-      attribute class {
-        "form-control mr-sm-2"
+  html5:element(
+    map {
+      "name" : "form",
+      "attributes" : map {
+        "class" : "form-inline my-2 my-lg-0"
       },
-      attribute type {
-        "search"
-      },
-      attribute name {
-        "q"
-      },
-      attribute placeholder {
-        "Search"
-      },
-      attribute required {
-        "required"
-      },
-      attribute aria-label {
-        "Search"
-      }
-    },
-    element button {
-      attribute class {
-        "btn btn-outline-light my-2 my-sm-0"
-      },
-      attribute type {
-        "submit"
-      },
-      attribute formaction {
-        "/search/"
-      },
-      "Search"
+      "content" : (
+        html5:element(
+          map {
+            "name" : "input",
+            "attributes" : map {
+              "class" : "form-control mr-sm-2",
+              "type" : "search",
+              "name" : "q",
+              "placeholder" : "Search",
+              "required" : "required",
+              "aria-label" : "Search"
+            }
+          }
+        ),
+        html5:element(
+          map {
+            "name" : "button",
+            "attributes" : map {
+              "class" : "btn btn-outline-light my-2 my-sm-0",
+              "type" : "submit",
+              "formaction" : "/search/"
+            },
+            "content" : "Search"
+          }
+        )
+      )
     }
-  }
+  )
 };
 declare %public function bootstrap:navbar-search(
   $parameter as map(*)?
@@ -404,53 +384,62 @@ declare %public function bootstrap:navbar-search(
       map:get($parameter, "formaction")
     )
   )
+  let $placeholder := (
+    if (
+      map:get($parameter, "placeholder")
+      => fn:empty()
+    )
+    then (
+      "Search"
+    )
+    else (
+      map:get($parameter, "placeholder")
+    )
+  )
   return (
-    element form {
-      attribute class {
-        "form-inline my-2 my-lg-0"
-      },
-      element input {
-        attribute class {
-          "form-control mr-sm-2"
+    html5:element(
+      map {
+        "name" : "form",
+        "attributes" : map {
+          "class" : "form-inline my-2 my-lg-0"
         },
-        attribute type {
-          "search"
-        },
-        attribute name {
-          $name
-        },
-        attribute placeholder {
-          "Search"
-        },
-        attribute required {
-          "required"
-        },
-        attribute aria-label {
-          "Search"
-        }
-      },
-      element button {
-        attribute class {
-          "btn btn-outline-light my-2 my-sm-0"
-        },
-        attribute type {
-          "submit"
-        },
-        attribute formaction {
-          $formaction
-        },
-        "Search"
+        "content" : (
+          html5:element(
+            map {
+              "name" : "input",
+              "attributes" : map {
+                "class" : "form-control mr-sm-2",
+                "type" : "search",
+                "name" : $name,
+                "placeholder" : $placeholder,
+                "required" : "required",
+                "aria-label" : $placeholder
+              }
+            }
+          ),
+          html5:element(
+            map {
+              "name" : "button",
+              "attributes" : map {
+                "class" : "btn btn-outline-light my-2 my-sm-0",
+                "type" : "submit",
+                "formaction" : $formaction
+              },
+              "content" : "Search"
+            }
+          )
+        )
       }
-    }
+    )
   )
 };
 
 (:~
- : A function to return a Bootstrap navbar component.
+ : A public function to return a Bootstrap navbar component.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.1
+ : @version v1.0.2
  : @since v0.2.0
  :
  : @param $parameter is one Bootstrap navbar ul element
@@ -505,11 +494,11 @@ declare %public function bootstrap:navbar(
 };
 
 (:~
- : A function to return a Bootstrap container component.
+ : A public function to return a Bootstrap container component.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.1
+ : @version v1.0.2
  : @since v0.2.0
  :
  : @param $parameter is a sequence of zero or more items
@@ -528,11 +517,11 @@ declare %public function bootstrap:container(
 };
 
 (:~
- : A function to return a Bootstrap card component.
+ : A public function to return a Bootstrap card component.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.1
+ : @version v1.0.2
  : @since v0.2.0
  :
  : @param $parameter is a sequence of zero or more items
@@ -551,11 +540,11 @@ declare %public function bootstrap:card(
 };
 
 (:~
- : A function to return a Bootstrap card layout.
+ : A public function to return a Bootstrap card layout.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.1
+ : @version v1.0.2
  : @since v0.2.0
  :
  : @param $cards is a sequence of zero or more div elements
@@ -586,11 +575,11 @@ declare %public function bootstrap:card-layout(
 };
 
 (:~
- : A function to return a Bootstrap list group component.
+ : A public function to return a Bootstrap list group component.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.1
+ : @version v1.0.2
  : @since v0.2.0
  :
  : @param $parameter is a sequence of zero or more items

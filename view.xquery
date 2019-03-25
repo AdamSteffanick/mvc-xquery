@@ -3,14 +3,14 @@ xquery version "3.1" encoding "UTF-8";
 (:~
  : The MVC-XQuery view function library module.
  :
- : MVC-XQuery | A Model-View-Controller framework for BaseX
+ : MVC-XQuery | A Model-View-Controller framework in XQuery for BaseX
  : Copyright (C) 2018–2019 Adam Steffanick
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.3.0
+ : @version v0.4.0
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : February 26, 2019
+ : March 25, 2019
  : @since v0.0.2
  :
  : This program is free software: you can redistribute it and/or modify
@@ -32,11 +32,11 @@ xquery version "3.1" encoding "UTF-8";
 module namespace v = "view";
 
 (:~
- : A function to return HTML to the user.
+ : A public function to return HTML to the user.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.1
+ : @version v1.0.2
  : @since v0.1.0
  :
  : @param $html is one html element

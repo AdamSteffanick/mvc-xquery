@@ -3,14 +3,14 @@ xquery version "3.1" encoding "UTF-8";
 (:~
  : The MVC-XQuery HTML v5.2 function library module.
  :
- : MVC-XQuery | A Model-View-Controller framework for BaseX
+ : MVC-XQuery | A Model-View-Controller framework in XQuery for BaseX
  : Copyright (C) 2018–2019 Adam Steffanick
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.3.0
+ : @version v0.4.0
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : February 26, 2019
+ : March 25, 2019
  : @since v0.3.0
  :
  : This program is free software: you can redistribute it and/or modify
@@ -31,17 +31,20 @@ xquery version "3.1" encoding "UTF-8";
  :)
 module namespace html5 = "html5";
 
+(: required function library modules :)
+import module namespace mvc = "mvc" at "mvc.xquery";
+
 (:~
- : A function to filter HTML5 elements for MVC-XQuery.
+ : A private function to filter HTML5 elements for MVC-XQuery.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.0
+ : @version v2.0.1
  : @since v0.1.0
  :
  : @param $parameter is a sequence of zero or more items
  : @return a sequence of zero or more items (default: <h1>Hello, world!</h1>)
- : @error mvc-xquery: item() must be of type element() or xs:string
+ : @error mvc: item() must be of type element() or xs:string
  :)
 declare %private function html5:html-filter(
   $parameter as item()*
@@ -68,7 +71,7 @@ declare %private function html5:html-filter(
       else (
         element pre {
           element i {
-            "mvc-xquery"
+            "mvc"
           },
           ": item() must be of type element() or xs:string"
         }
@@ -78,146 +81,11 @@ declare %private function html5:html-filter(
 };
 
 (:~
- : A function to refine the parameter of html5:html() for MVC-XQuery.
+ : A private function to return priority HTML5 meta elements.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.0
- : @since v0.2.2
- :
- : @param $parameter is a sequence of one or more map items
- : @return one map item for use with html5:html()
- :)
-declare %private function html5:html-refine(
-  $parameter as map(*)+
-) as map(*)
-{
-  let $refined-input := (
-    let $unrefined-input := (
-      $parameter
-      => map:merge(map {"duplicates" : "combine"})
-    )
-    let $merged-input := (
-      let $simplex-maps := (
-        for $key in map:keys($unrefined-input)
-        where (
-          $key = "lang"
-        )
-        return (
-          map {
-            $key : (
-              map:get($unrefined-input, $key)
-            )
-          }
-        )
-      )
-      let $complex-maps := (
-        for $key in map:keys($unrefined-input)
-        where (
-          $key = "head"
-          or $key = "body"
-        )
-        return (
-          map {
-            $key : (
-              if (
-                fn:count(map:get($unrefined-input, $key)) > 1
-              )
-              then (
-                let $values := (
-                  map:get($unrefined-input, $key)
-                  => map:merge(map {"duplicates" : "combine"})
-                )
-                return (
-                  $values
-                )
-              )
-              else (
-                map:get($unrefined-input, $key)
-              )
-            )
-          }
-        )
-      )
-      return (
-        $simplex-maps,
-        $complex-maps
-      )
-    ) => map:merge()
-    let $clean-input := (
-      for $key in map:keys($merged-input)
-      return (
-        map {
-          $key : (
-            if (
-              $key = "lang"
-            )
-            then (
-              $merged-input
-              => map:get($key)
-              => fn:reverse()
-              => fn:head()
-            )
-            else if (
-              $key = "head"
-            )
-            then (
-              map:merge(
-                for $child-map in map:get($merged-input, $key)
-                return (
-                  for $child-key in map:keys($child-map)
-                  return (
-                    map {
-                      $child-key : (
-                        if (
-                          $child-key = "base"
-                          or $child-key = "title"
-                          or $child-key = "no-script"
-                          or $child-key = "template"
-                        )
-                        then (
-                          map:get($child-map, $child-key)
-                          => fn:reverse()
-                          => fn:head()
-                        )
-                        else (
-                          map:get($child-map, $child-key)
-                        )
-                      )
-                    }
-                  )
-                )
-              )
-            )
-            else if (
-              $key = "body"
-            )
-            then(
-              for $child-map in map:get($merged-input, $key)
-              return (
-                $child-map
-              )
-            )
-          )
-        }
-      )
-    )
-    return (
-      $clean-input
-      => map:merge()
-    )
-  )
-  return (
-    $refined-input
-  )
-};
-
-(:~
- : A function to return a minimal HTML5 meta element and optional meta elements.
- :
- : @author Adam Steffanick
- : @see https://www.steffanick.com/adam/
- : @version v2.0.0
+ : @version v2.0.1
  : @since v0.1.0
  :
  : @param $parameter is a sequence of zero or more meta elements
@@ -241,7 +109,7 @@ declare %private function html5:meta-priority(
 };
 
 (:~
- : A function to return an optional base element.
+ : A private function to return an optional HTML5 base element.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
@@ -259,11 +127,11 @@ declare %private function html5:base(
 };
 
 (:~
- : A function to return a title element.
+ : A private function to return an HTML5 title element.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.1
+ : @version v1.0.2
  : @since v0.1.0
  :
  : @param $parameter is a sequence of zero or one strings
@@ -282,7 +150,7 @@ declare %private function html5:title(
         $parameter
       )
       else (
-        "MVC-XQuery | A Model-View-Controller framework for BaseX"
+        $mvc:title
       )
     }
   )
@@ -292,11 +160,11 @@ declare %private function html5:title(
 };
 
 (:~
- : A function to return optional link elements.
+ : A private function to return optional HTML5 link elements.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.0
+ : @version v2.0.1
  : @since v0.1.0
  :
  : @param $parameter is a sequence of zero or more link elements
@@ -310,11 +178,11 @@ declare %private function html5:link(
 };
 
 (:~
- : A function to return optional style elements.
+ : A private function to return optional HTML5 style elements.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.0
+ : @version v2.0.1
  : @since v0.1.0
  :
  : @param $parameter is a sequence of zero or more style elements
@@ -328,11 +196,11 @@ declare %private function html5:style(
 };
 
 (:~
- : A function to return optional script elements.
+ : A private function to return optional HTML5 script elements.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.0
+ : @version v2.0.1
  : @since v0.1.0
  :
  : @param $parameter is a sequence of zero or more script elements
@@ -346,11 +214,11 @@ declare %private function html5:script(
 };
 
 (:~
- : A function to return an optional noscript element.
+ : A private function to return an optional HTML5 noscript element.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.0
+ : @version v2.0.1
  : @since v0.1.0
  :
  : @param $parameter is a sequence of zero or one noscript elements
@@ -364,11 +232,11 @@ declare %private function html5:noscript(
 };
 
 (:~
- : A function to return optional meta elements.
+ : A private function to return optional HTML5 meta elements.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.0
+ : @version v2.0.1
  : @since v0.1.0
  :
  : @param $parameter is a sequence of zero or more meta elements
@@ -382,11 +250,11 @@ declare %private function html5:meta(
 };
 
 (:~
- : A function to return an optional template element.
+ : A private function to return an optional HTML5 template element.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.0
+ : @version v2.0.1
  : @since v0.1.0
  :
  : @param $parameter is a sequence of zero or one template elements
@@ -400,11 +268,11 @@ declare %private function html5:template(
 };
 
 (:~
- : A function to return a lang attribute.
+ : A private function to return an HTML5 lang attribute.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.0
+ : @version v2.0.1
  : @since v0.1.0
  :
  : @param $parameter is a sequence of zero or one strings
@@ -433,11 +301,11 @@ declare %private function html5:lang(
 };
 
 (:~
- : A function to return a minimal HTML5 head element and optional elements.
+ : A private function to return an HTML5 head element and optional elements.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v2.0.0
+ : @version v2.0.1
  : @since v0.1.0
  :
  : @param (optional) $parameter is a sequence of zero or one map items
@@ -491,12 +359,12 @@ declare %private function html5:head(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.3.0
  :
  : @param $parameter is one map item
  : @return one HTML5 element containing optional items
- : @error mvc-xquery: item() must be of type element() or xs:string
+ : @error mvc: item() must be of type element() or xs:string
  :)
 declare %public function html5:element(
   $parameter as map(*)
@@ -508,7 +376,7 @@ declare %public function html5:element(
   then (
     element pre {
       element i {
-        "mvc-xquery"
+        "mvc"
       },
       ": html5:element($parameter) must contain the key “name”"
     }
@@ -547,11 +415,11 @@ declare %public function html5:element(
 };
 
 (:~
- : A function to return a minimal HTML5 body element and optional items.
+ : A private function to return an HTML5 body element and optional items.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v3.0.0
+ : @version v3.0.1
  : @since v0.1.0
  :
  : @param (optional) $parameter is a sequence of zero or one map items
@@ -583,11 +451,11 @@ declare %private function html5:body(
 };
 
 (:~
- : A function to return a minimal HTML5 html element and optional items.
+ : A public function to return an HTML5 html element and optional items.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v3.0.0
+ : @version v3.0.1
  : @since v0.1.0
  :
  : @param (optional) $parameter is a sequence of one or more map items
@@ -607,7 +475,7 @@ declare %public function html5:html(
 ) as element(html)
 {
   let $refined-input := (
-    html5:html-refine($parameter)
+    mvc:html-refine($parameter)
   )
   let $html := (
     element html {
