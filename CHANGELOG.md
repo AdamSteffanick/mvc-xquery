@@ -5,6 +5,26 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
+## [0.5.0] - 2020-01-01
+### Added
+* [tei.xquery]
+* `mvc:minify` ([mvc.xquery])
+* `mvc-tei:dispatch` ([tei.xquery])
+* `mvc-tei:passthru` ([tei.xquery])
+* `mvc-tei:w` ([tei.xquery])
+* `mvc-tei:s` ([tei.xquery])
+* `mvc-tei:seg` ([tei.xquery])
+* `mvc-tei:p` ([tei.xquery])
+* `mvc-tei:bibl` ([tei.xquery])
+* `mvc-tei:ref` ([tei.xquery])
+* `mvc-tei:quote` ([tei.xquery])
+* `mvc-tei:q` ([tei.xquery])
+* `mvc-tei:hi` ([tei.xquery])
+* `mvc-tei:mark` ([tei.xquery])
+* `mvc-tei:pb` ([tei.xquery])
+* `mvc-tei:lb` ([tei.xquery])
+* `mvc-tei:body` ([tei.xquery])
+
 ## [0.4.0] - 2019-03-25
 ### Added
 * [mvc.xquery]
@@ -142,7 +162,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 * [LISENCE]
 * [README.md]
 
-[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.3...v0.3.0
 [0.2.3]: https://github.com/AdamSteffanick/mvc-xquery/compare/v0.2.2...v0.2.3
@@ -167,6 +188,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 [bootstrap.xquery]: ./modules/bootstrap.xquery
 [html5.xquery]: ./modules/html5.xquery
 [mvc.xquery]: ./modules/mvc.xquery
+[tei.xquery]: ./modules/tei.xquery
 
 [Bootstrap]: https://getbootstrap.com/
 [shields.io]: http://shields.io/

@@ -4,13 +4,13 @@ xquery version "3.1" encoding "UTF-8";
  : The MVC-XQuery function library module.
  :
  : MVC-XQuery | A Model-View-Controller framework in XQuery for BaseX
- : Copyright (C) 2018–2019 Adam Steffanick
+ : Copyright (C) 2018–2020 Adam Steffanick
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.4.0
+ : @version v0.5.0
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : March 25, 2019
+ : January 1, 2020
  : @since v0.4.0
  :
  : This program is free software: you can redistribute it and/or modify
@@ -34,19 +34,20 @@ module namespace mvc = "mvc";
 (: required function library modules :)
 import module namespace bootstrap = "bootstrap" at "bootstrap.xquery";
 import module namespace html5 = "html5" at "html5.xquery";
+import module namespace mvc-tei = "mvc-tei" at "tei.xquery";
 
 (:~
  : A public variable containing the MVC-XQuery version.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v1.0.1
  : @since v0.4.0
  :
  : @return one string containing the MVC-XQuery brand
  :)
 declare %public variable $mvc:version as xs:string := (
-  "v0.4.0"
+  "v0.5.0"
 );
 
 (:~
@@ -376,4 +377,34 @@ declare %public function mvc:html-refine(
   return (
     $refined-input
   )
+};
+
+(:~
+ : A public function to minify the HTML5 output of ft:mark() for BaseX.
+ :
+ : @author Adam Steffanick
+ : @see https://www.steffanick.com/adam/
+ : @version v1.0.0
+ : @since v0.5.0
+ :
+ : @param $parameter is a sequence of zero or more nodes
+ : @return one minified node
+ :)
+declare %public function mvc:minify($parameter as node()*) {
+  let $serialization-parameters :=
+    <serialization-parameters xmlns="http://www.w3.org/2010/xslt-xquery-serialization">
+      <omit-xml-declaration value="yes"/>
+    </serialization-parameters>
+  let $codeString := fn:serialize($parameter, $serialization-parameters)
+
+(:  let $codeStringNormalized := fn:replace($codeString, "\s+", " ") :)
+  let $codeStringMinifyElementWhitespace := fn:replace($codeString, "&#10;\s+", "&#10;")
+(:  let $codeStringMinifyElementWhitespace2 := fn:replace($codeString, ">\s+<", "><") :)
+  let $codeStringMinifyCloseSpans := fn:replace($codeStringMinifyElementWhitespace, "</span>\s+</span>", "</span></span>")
+  let $codeStringMinifyCloseMarkLF := fn:replace($codeStringMinifyCloseSpans, "</mark>&#10;", "</mark>")
+  let $codeStringMinifyLFCloseI := fn:replace($codeStringMinifyCloseMarkLF, "&#10;</i>", "</i>")
+  let $codeStringMinifyQuoteLF := fn:replace($codeStringMinifyLFCloseI, "“&#10;", "“")
+  let $codeStringMinifyLFQuote := fn:replace($codeStringMinifyQuoteLF, "&#10;”", "”")
+
+  return fn:parse-xml-fragment($codeStringMinifyLFQuote)
 };
