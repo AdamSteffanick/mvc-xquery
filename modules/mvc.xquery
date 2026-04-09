@@ -474,6 +474,14 @@ declare %private function mvc:html-meta-priority(
         "utf-8"
       }
     },
+    element meta {
+      attribute name {
+        "viewport"
+      },
+      attribute content {
+        "width=device-width, initial-scale=1.0"
+      }
+    },
     $parameter
   )
   return (

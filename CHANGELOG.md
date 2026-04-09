@@ -1,15 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
+The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
+### Added
+* Viewport → `mvc:html-meta-priority()` ([mvc.xquery])
+
 ### Fixed
 `out:nl()` → `fn:char('\n')` in `$mvc:paths` ([mvc.xquery])
 
 ### Changed
-* `mvc:html-refine()` → `mvc:refine-html` ([mvc.xquery])
-* `mvc:minify()` → `mvc:minify-html-mark()` ([mvc.xquery])
+* `c:home()` options ([controller.xquery])
 * `html5:html-filter()` ([html5.xquery]) → `mvc:filter-html()` ([mvc.xquery])
 * `html5:meta-priority()` ([html5.xquery]) → `mvc:html-meta-priority()` ([mvc.xquery])
 * `html5:base()` ([html5.xquery]) → `mvc:html-base()` ([mvc.xquery])
@@ -25,6 +27,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 * `html5:element()` ([html5.xquery]) → `mvc:html-element()` ([mvc.xquery])
 * `html5:body()` ([html5.xquery]) → `mvc:html-body()` ([mvc.xquery])
 * `html5:html()` ([html5.xquery]) → `mvc:html()` ([mvc.xquery])
+* `mvc:html-refine()` → `mvc:refine-html` ([mvc.xquery])
+* `mvc:minify()` → `mvc:minify-html-mark()` ([mvc.xquery])
 
 ### Removed
 * [bootstrap.xquery]

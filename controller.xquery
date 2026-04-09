@@ -49,8 +49,8 @@ declare
 %rest:path("/")
 %rest:GET
 %output:method("html")
-%output:version("5.0")
-%output:indent("no")
+%output:html-version("5.0")
+%output:include-content-type("no")
 %private function c:home(
 )
 {

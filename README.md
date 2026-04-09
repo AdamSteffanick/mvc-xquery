@@ -17,11 +17,13 @@ Copyright (C) 2018–2026 [Adam Steffanick](https://www.steffanick.com/adam/)
 * Navigate to http://localhost:8080 in your browser
 
 ### Default output
-#### html:html()
+#### mvc:html()
 ```
+<!DOCTYPE HTML>
 <html lang="en">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MVC-XQuery | A Model-View-Controller framework in XQuery for BaseX</title>
   </head>
   <body>
@@ -52,6 +54,14 @@ mvc-xquery
 
 1 directory, 8 files
 ```
+
+## Development workflow
+We use a long-lived `develop` branch for all ongoing work and continuous development.
+
+* All new features, bug fixes, and updates are made directly on `develop`.
+* `main` is protected and always contains the latest stable release.
+* When a release is ready, we open a single Pull Request from `develop` → `main`.
+* Releases follow [Semantic Versioning](https://semver.org/) and include updated changelog notes.
 
 ## Acknowledgments
 MVC-XQuery derives from [Experiments with XQuery, RESTXQ, and MVC in BaseX](https://gist.github.com/CliffordAnderson/80c68ea43557446b8331) by [Clifford Anderson](https://github.com/CliffordAnderson) and my work with the members of the TEI, XQuery, Semantic Web, and Linked Data working groups at Vanderbilt University.
