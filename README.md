@@ -4,7 +4,7 @@
 
 MVC-XQuery | A Model-View-Controller framework in XQuery for BaseX
 
-Copyright (C) 2018–2020 [Adam Steffanick](https://www.steffanick.com/adam/)
+Copyright (C) 2018–2026 [Adam Steffanick](https://www.steffanick.com/adam/)
 
 ## Download
 * [**Latest release**](https://github.com/AdamSteffanick/mvc-xquery/releases/latest)
@@ -13,11 +13,11 @@ Copyright (C) 2018–2020 [Adam Steffanick](https://www.steffanick.com/adam/)
 ### [BaseX]:
 * Download this repository and place all files within the `webapp` subdirectory of `basex`
 * Modify [model.xquery], [view.xquery], and [controller.xquery] as needed
-* Run the [BaseX HTTP Server](http://docs.basex.org/wiki/Startup#HTTP_Server)
-* Navigate to http://localhost:8984 in your browser
+* Run the [BaseX HTTP Server](https://docs.basex.org/main/Startup#HTTP_Server)
+* Navigate to http://localhost:8080 in your browser
 
 ### Default output
-#### html5:html()
+#### html:html()
 ```
 <html lang="en">
   <head>
@@ -26,32 +26,13 @@ Copyright (C) 2018–2020 [Adam Steffanick](https://www.steffanick.com/adam/)
   </head>
   <body>
     <h1>Hello, world!</h1>
-  </body>
-</html>
-```
-
-#### html5:html($bootstrap:template)
-```
-<html lang="en">
-  <head>
-    <meta charset="utf-8"/>
-    <title>MVC-XQuery | A Model-View-Controller framework in XQuery for BaseX</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"/>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"/>
   </body>
 </html>
 ```
 
 ## Features
-* [BaseX] 9.1.2 support
-* [Bootstrap] v4.3.1 support
-* [HTML5] v5.2 support
+* [BaseX] 12.2 support
+* [HTML] support
 * [TEI] P5 support
 
 ## Manifest tree
@@ -65,13 +46,11 @@ mvc-xquery
 ├── controller.xquery
 ├── model.xquery
 ├── modules
-│   ├── bootstrap.xquery
-│   ├── html5.xquery
 │   └── mvc.xquery
 │   └── tei.xquery
 └── view.xquery
 
-1 directory, 10 files
+1 directory, 8 files
 ```
 
 ## Acknowledgments
@@ -85,7 +64,7 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 [CHANGELOG]: ./CHANGELOG.md
-[version-badge]: https://img.shields.io/badge/mvc--xquery-v0.5.0-0038e2.svg?style=flat-square
+[version-badge]: https://img.shields.io/badge/mvc--xquery-v0.6.0-0038e2.svg?style=flat-square
 [LICENSE]: ./LICENSE
 [license-badge]: https://img.shields.io/badge/license-GPL-0038e2.svg?style=flat-square
 
@@ -94,6 +73,5 @@ You should have received a copy of the GNU General Public License along with thi
 [controller.xquery]: ./controller.xquery
 
 [BaseX]: http://basex.org/
-[Bootstrap]: https://getbootstrap.com/
-[HTML5]: https://www.w3.org/TR/html52/
+[HTML]: https://html.spec.whatwg.org/multipage/
 [TEI]: https://tei-c.org/guidelines/p5/

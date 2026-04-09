@@ -4,13 +4,13 @@ xquery version "3.1" encoding "UTF-8";
  : The MVC-XQuery model function library module.
  :
  : MVC-XQuery | A Model-View-Controller framework in XQuery for BaseX
- : Copyright (C) 2018–2020 Adam Steffanick
+ : Copyright (C) 2018–2026 Adam Steffanick
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.5.0
+ : @version v0.6.0
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : January 1, 2020
+ : April 8, 2026
  : @since v0.0.2
  :
  : This program is free software: you can redistribute it and/or modify
@@ -32,24 +32,22 @@ xquery version "3.1" encoding "UTF-8";
 module namespace m = "model";
 
 (: required function library modules :)
-import module namespace html5 = "html5" at "modules/html5.xquery";
 import module namespace mvc = "mvc" at "modules/mvc.xquery";
 
 (: optional function library modules :)
-import module namespace bootstrap = "bootstrap" at "modules/bootstrap.xquery";
 
 (:~
- : A public function to return an HTML5 home page.
+ : A public function to return an HTML home page.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.1
+ : @version v0.6.0
  : @since v0.3.0
  :
- : @return an HTML5 home page
+ : @return an HTML home page
  :)
 declare %public function m:home(
 )
 {
-  html5:html()
+  mvc:html()
 };

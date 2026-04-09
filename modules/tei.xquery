@@ -4,13 +4,13 @@ xquery version "3.1" encoding "UTF-8";
  : The MVC-XQuery TEI function library module.
  :
  : MVC-XQuery | A Model-View-Controller framework in XQuery for BaseX
- : Copyright (C) 2018–2020 Adam Steffanick
+ : Copyright (C) 2018–2026 Adam Steffanick
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.5.0
+ : @version v0.6.0
  : @see https://github.com/AdamSteffanick/mvc-xquery
- : January 1, 2020
+ : April 8, 2026
  : @since v0.5.0
  :
  : This program is free software: you can redistribute it and/or modify
@@ -42,7 +42,7 @@ declare namespace tei = "http://www.tei-c.org/ns/1.0";
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.6.0
  : @since v0.5.0
  :
  : @param $nodes is a sequence of zero or more TEI nodes
@@ -51,7 +51,7 @@ declare namespace tei = "http://www.tei-c.org/ns/1.0";
 declare function mvc-tei:dispatch($nodes as node()*) {
   for $node in $nodes
   return
-  mvc:minify(
+  mvc:minify-html-mark(
     typeswitch($node)
     case text() return $node (: mvc-tei:mvc-tei-text($node) :)
     case comment() return $node
@@ -77,7 +77,7 @@ declare function mvc-tei:dispatch($nodes as node()*) {
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is a sequence of zero or more TEI nodes
@@ -92,7 +92,7 @@ declare %private function mvc-tei:passthru($node as node()*) as item()* {
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is one tei:w element
@@ -109,7 +109,7 @@ declare %private function mvc-tei:w($node as element(tei:w)) as element() {
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is one tei:s element
@@ -126,7 +126,7 @@ declare %private function mvc-tei:s($node as element(tei:s)) as element() {
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is one tei:seg element
@@ -143,7 +143,7 @@ declare %private function mvc-tei:seg($node as element(tei:seg)) as element() {
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is one tei:p element
@@ -158,7 +158,7 @@ declare %private function mvc-tei:p($node as element(tei:p)) as element() {
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is one tei:bibl element
@@ -173,7 +173,7 @@ declare %private function mvc-tei:bibl($node as element(tei:bibl)) as element() 
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is one tei:ref element
@@ -188,7 +188,7 @@ declare %private function mvc-tei:ref($node as element(tei:ref)) as element() {
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is one tei:quote element
@@ -208,7 +208,7 @@ declare %private function mvc-tei:quote($node as element(tei:quote)) as element(
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is one tei:q element
@@ -223,7 +223,7 @@ declare %private function mvc-tei:q($node as element(tei:q)) as element() {
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is one tei:hi element
@@ -243,7 +243,7 @@ declare %private function mvc-tei:hi($node as element(tei:hi)) as element() {
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is one tei:mark element
@@ -258,7 +258,7 @@ declare %private function mvc-tei:mark($node as element(tei:mark)) as element() 
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is one tei:pb element
@@ -273,7 +273,7 @@ declare %private function mvc-tei:pb($node as element(tei:pb)) {
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is one tei:lb element
@@ -288,7 +288,7 @@ declare %private function mvc-tei:lb($node as element(tei:lb)) as element() {
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v1.0.0
+ : @version v0.5.0
  : @since v0.5.0
  :
  : @param $node is one tei:body element

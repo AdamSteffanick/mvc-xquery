@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
+### Fixed
+`out:nl()` → `fn:char('\n')` in `$mvc:paths` ([mvc.xquery])
+
+### Changed
+* `mvc:html-refine()` → `mvc:refine-html` ([mvc.xquery])
+* `mvc:minify()` → `mvc:minify-html-mark()` ([mvc.xquery])
+* `html5:html-filter()` ([html5.xquery]) → `mvc:filter-html()` ([mvc.xquery])
+* `html5:meta-priority()` ([html5.xquery]) → `mvc:html-meta-priority()` ([mvc.xquery])
+* `html5:base()` ([html5.xquery]) → `mvc:html-base()` ([mvc.xquery])
+* `html5:title()` ([html5.xquery]) → `mvc:html-title()` ([mvc.xquery])
+* `html5:link()` ([html5.xquery]) → `mvc:html-title()` ([mvc.xquery])
+* `html5:style()` ([html5.xquery]) → `mvc:html-style()` ([mvc.xquery])
+* `html5:script()` ([html5.xquery]) → `mvc:html-script()` ([mvc.xquery])
+* `html5:noscript()` ([html5.xquery]) → `mvc:html-noscript()` ([mvc.xquery])
+* `html5:meta()` ([html5.xquery]) → `mvc:html-meta()` ([mvc.xquery])
+* `html5:template()` ([html5.xquery]) → `mvc:html-template()` ([mvc.xquery])
+* `html5:lang()` ([html5.xquery]) → `mvc:html-lang()` ([mvc.xquery])
+* `html5:head()` ([html5.xquery]) → `mvc:html-head()` ([mvc.xquery])
+* `html5:element()` ([html5.xquery]) → `mvc:html-element()` ([mvc.xquery])
+* `html5:body()` ([html5.xquery]) → `mvc:html-body()` ([mvc.xquery])
+* `html5:html()` ([html5.xquery]) → `mvc:html()` ([mvc.xquery])
+
+### Removed
+* [bootstrap.xquery]
+* [html5.xquery]
 
 ## [0.5.0] - 2020-01-01
 ### Added
@@ -185,10 +210,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 [view.xquery]: ./view.xquery
 
 [/modules/]: ./modules/
-[bootstrap.xquery]: ./modules/bootstrap.xquery
-[html5.xquery]: ./modules/html5.xquery
+[html.xquery]: ./modules/html.xquery
 [mvc.xquery]: ./modules/mvc.xquery
 [tei.xquery]: ./modules/tei.xquery
 
-[Bootstrap]: https://getbootstrap.com/
 [shields.io]: http://shields.io/
+
+[html5.xquery]: https://github.com/AdamSteffanick/mvc-xquery/blob/fcff74b28ad173416055d1e4bbc4d070c0256797/modules/html5.xquery
+[bootstrap.xquery]: https://github.com/AdamSteffanick/mvc-xquery/blob/fcff74b28ad173416055d1e4bbc4d070c0256797/modules/bootstrap.xquery
+[Bootstrap]: https://getbootstrap.com/
