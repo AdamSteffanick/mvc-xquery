@@ -17,7 +17,6 @@ Copyright (C) 2018–2026 [Adam Steffanick](https://www.steffanick.com/adam/)
 * Navigate to http://localhost:8080 in your browser
 
 ### Default output
-#### mvc:html()
 ```
 <!DOCTYPE HTML>
 <html lang="en">
