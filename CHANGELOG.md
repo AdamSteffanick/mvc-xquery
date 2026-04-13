@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 `out:nl()` → `fn:char('\n')` in `$mvc:paths` ([mvc.xquery])
 
 ### Changed
+* `$mvc:template` ([mvc.xquery])
 * `c:home()` options ([controller.xquery])
 * `html5:html-filter()` ([html5.xquery]) → `mvc:filter-html()` ([mvc.xquery])
 * `html5:meta-priority()` ([html5.xquery]) → `mvc:html-meta-priority()` ([mvc.xquery])

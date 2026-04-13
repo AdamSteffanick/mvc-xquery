@@ -49,5 +49,5 @@ import module namespace mvc = "mvc" at "modules/mvc.xquery";
 declare %public function m:home(
 )
 {
-  mvc:html()
+  $mvc:template
 };

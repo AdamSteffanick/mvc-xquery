@@ -31,20 +31,26 @@ xquery version "3.1" encoding "UTF-8";
  :)
 module namespace v = "view";
 
+(: required function library modules :)
+import module namespace mvc = "mvc" at "modules/mvc.xquery";
+
+(: optional function library modules :)
+
 (:~
  : A public function to return HTML to the user.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.2.0
+ : @version v0.6.0
  : @since v0.1.0
  :
  : @param $html is one html element
  : @return one html element
  :)
 declare %public function v:html(
-  $html as element(html)
+  $data as map(*)+
 ) as element(html)
 {
-  $html
+  $data
+  => mvc:html()
 };

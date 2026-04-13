@@ -117,19 +117,13 @@ declare %public variable $mvc:paths as xs:string := (
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
- : @version v0.4.0
+ : @version v0.6.0
  : @since v0.4.0
  :
  : @return one MVC-XQuery template map item
  :)
 declare %public variable $mvc:template as map(*) := (
   map {
-    "head" : map {
-      "title" : $mvc:title
-    },
-    "body" : map {
-      "content" : ""
-    }
   }
 );
 
