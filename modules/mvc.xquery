@@ -113,21 +113,6 @@ declare %public variable $mvc:paths as xs:string := (
 );
 
 (:~
- : A public variable containing the MVC-XQuery template.
- :
- : @author Adam Steffanick
- : @see https://www.steffanick.com/adam/
- : @version v0.6.0
- : @since v0.4.0
- :
- : @return one MVC-XQuery template map item
- :)
-declare %public variable $mvc:template as map(*) := (
-  map {
-  }
-);
-
-(:~
  : A public function to return MVC-XQuery path elements.
  :
  : @author Adam Steffanick

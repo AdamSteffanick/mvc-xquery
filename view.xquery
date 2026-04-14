@@ -44,13 +44,13 @@ import module namespace mvc = "mvc" at "modules/mvc.xquery";
  : @version v0.6.0
  : @since v0.1.0
  :
- : @param $html is one html element
- : @return one html element
+ : @param (optional) $parameter is a sequence of one or more map items
+ : @return HTML
  :)
-declare %public function v:html(
-  $data as map(*)+
-) as element(html)
+declare %public function v:render-html(
+  $parameter as map(*)+
+) as element()
 {
-  $data
+  $parameter
   => mvc:html()
 };

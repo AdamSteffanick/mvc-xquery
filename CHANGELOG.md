@@ -5,13 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 
 ## [Unreleased]
 ### Added
+* `m:map()` @param `$parameter` ([model.xquery])
+* `v:render-html` @param `$parameter` ([view.xquery])
 * Viewport → `mvc:html-meta-priority()` ([mvc.xquery])
 
 ### Fixed
-`out:nl()` → `fn:char('\n')` in `$mvc:paths` ([mvc.xquery])
+* `out:nl()` → `fn:char('\n')` in `$mvc:paths` ([mvc.xquery])
 
 ### Changed
-* `$mvc:template` ([mvc.xquery])
 * `c:home()` options ([controller.xquery])
 * `html5:html-filter()` ([html5.xquery]) → `mvc:filter-html()` ([mvc.xquery])
 * `html5:meta-priority()` ([html5.xquery]) → `mvc:html-meta-priority()` ([mvc.xquery])
@@ -28,10 +29,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 * `html5:element()` ([html5.xquery]) → `mvc:html-element()` ([mvc.xquery])
 * `html5:body()` ([html5.xquery]) → `mvc:html-body()` ([mvc.xquery])
 * `html5:html()` ([html5.xquery]) → `mvc:html()` ([mvc.xquery])
+* `m:home()` → `m:map()` ([model.xquery])
 * `mvc:html-refine()` → `mvc:refine-html` ([mvc.xquery])
 * `mvc:minify()` → `mvc:minify-html-mark()` ([mvc.xquery])
+* `v:html()` → `v:render-html` ([view.xquery])
 
 ### Removed
+* `$mvc:template` ([mvc.xquery])
 * [bootstrap.xquery]
 * [html5.xquery]
 

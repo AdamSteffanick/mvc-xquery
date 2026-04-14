@@ -32,22 +32,29 @@ xquery version "3.1" encoding "UTF-8";
 module namespace m = "model";
 
 (: required function library modules :)
-import module namespace mvc = "mvc" at "modules/mvc.xquery";
 
 (: optional function library modules :)
 
 (:~
- : A public function to return an HTML home page.
+ : A public function to return one or more map items.
  :
  : @author Adam Steffanick
  : @see https://www.steffanick.com/adam/
  : @version v0.6.0
  : @since v0.3.0
  :
- : @return an HTML home page
+ : @param (optional) $parameter is a sequence of one or more map items
+ : @return one or more map items (default: empty map)
  :)
-declare %public function m:home(
+declare %public function m:map(
+) as map(*)
+{
+  map {
+  }
+};
+declare %public function m:map(
+  $parameter as map(*)+
 )
 {
-  $mvc:template
+  $parameter
 };

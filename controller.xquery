@@ -54,6 +54,6 @@ declare
 %private function c:home(
 )
 {
-  m:home()
-  => v:html()
+  m:map()
+  => v:render-html()
 };
